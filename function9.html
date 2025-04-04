@@ -1,0 +1,23 @@
+<html>
+
+<head>
+</head>
+
+<body>
+    <script>
+        let arr = [] //빈 배열을 선언 arr = []와 같음
+        arr[0] = 23;
+        arr[1] = 12;
+        arr[2] = 34;
+        //같은 내용을 한줄로...(배열 초기화)
+        arr = [23, 12, 34];
+        let sum = 0;
+        for (let i = 0; i < 3; i++){
+            document.write(`arr[${i}]=${arr[i]}`);
+            sum = sum + arr[i];
+        }
+        document.write("배열을 더한 값은 ${sum}");
+    </script>
+</body>
+
+</html>
