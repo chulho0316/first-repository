@@ -1,0 +1,19 @@
+<head>
+    <style>
+        body { overflow: hidden; }
+        #followMouse { transition: transform 1s linear; }
+    </style>
+</head>
+<body>
+    <img id="followMouse" src="C:\Users\ch1kb\OneDrive\바탕 화면\강남 AI\연습\src\20250401\mouse2.png">
+    <script>
+        let image = document.getElementById("followMouse");
+        document.onmousemove = updateImage;
+
+        function updateImage(event) {
+            const X = event.clientX;
+            const Y = event.clientY;
+            image.style.transform = `translate(${X}px, ${Y}px)`;
+        }
+    </script>
+</body>
