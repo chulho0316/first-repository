@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            img {
+                position: absolute;
+                height: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="photo4.jpg" style="z-index: 1">
+        <img src="photo4.jpg" style="top: 100px; left: 100px; z-index: 50">
+        <img src="photo4.jpg" style="top: 200px; left: 200px; z-index: 100">
+        <img src="photo4.jpg" style="top: 300px; left: 300px; z-index: 80">
+        <img src="photo4.jpg" style="top: 400px; left: 400px; z-index: 70">
+        
+        <script>
+            // 이미지 선택 시 동작하는 함수
+            function OnSelect(selectedImage) {
+                // 모든 이미지의 z-index 초기화 (이미지 배열의 index값으로 설정)
+                let images = Array.from(document.querySelectorAll("img"));
+                for (let i = 0; i < images.length; i++) {
+                    images[i].style.zIndex = i; // 각 이미지의 z-index를 배열 인덱스로 설정
+                }
+
+                // 선택된 이미지의 z-index를 이미지 개수로 설정
+                selectedImage.style.zIndex = images.length;
+            }
+
+            // 이미지에 클릭 이벤트 추가
+            let images = Array.from(document.querySelectorAll("img"));
+            for (let i = 0; i < images.length; i++) {
+                images[i].addEventListener("click", function() {
+                    OnSelect(this); // 클릭된 이미지를 OnSelect 함수로 전달
+                });
+            }
+        </script>
+    </body>
+</html>

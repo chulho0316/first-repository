@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        img {
+            position: absolute;
+            height: 150px;
+            cursor: pointer; /* 마우스를 올렸을 때 손 모양 */
+        }
+    </style>
+</head>
+
+<body>
+    <img src="photo4.jpg" style="z-index: 1" onclick="bringToFront(this)">
+    <img src="photo4.jpg" style="top: 100px; left: 100px; z-index: 50" onclick="bringToFront(this)">
+    <img src="photo4.jpg" style="top: 200px; left: 200px; z-index: 100" onclick="bringToFront(this)">
+    <img src="photo4.jpg" style="top: 300px; left: 300px; z-index: 80" onclick="bringToFront(this)">
+    <img src="photo4.jpg" style="top: 400px; left: 400px; z-index: 70" onclick="bringToFront(this)">
+
+    <script>
+        // 이미지를 클릭하면 가장 위로 올리는 함수
+        function bringToFront(clickedImage) {
+            let allImages = document.querySelectorAll('img');
+            let maxZIndex = 0;
+
+            // 현재 화면에 있는 이미지들 중 가장 큰 z-index 값을 찾음
+            allImages.forEach(image => {
+                let zIndex = parseInt(window.getComputedStyle(image).zIndex);
+                if (zIndex > maxZIndex) {
+                    maxZIndex = zIndex;
+                }
+            });
+
+            // 클릭한 이미지의 z-index를 가장 큰 값보다 1 큰 값으로 설정
+            clickedImage.style.zIndex = maxZIndex + 1;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            display: flex;
+            position: relative;
+        }
+        img {
+            height: 150px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="photo4.jpg">
+        <img src="photo4.jpg">
+        <img src="photo4.jpg">
+        <img src="photo4.jpg">
+        <img src="photo4.jpg">
+    </div>
+
+    <script>
+        let images = document.querySelectorAll("img");
+
+        images.forEach(img => {
+            img.addEventListener("click", function () {
+                // 클릭된 이미지를 맨 앞으로 보내는 방식
+                img.style.order = -1;
+            });
+        });
+    </script>
+</body>
+</html>
