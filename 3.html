@@ -1,0 +1,43 @@
+<html>
+
+<head>
+</head>
+<style>
+    body,
+    form {
+        text-align: center;
+    }
+
+    #result {
+        color: #933;
+    }
+</style>
+
+<body>
+    <div>
+        <form id="myForm" name="nameForm">
+            <label for="message">입력하세요:</label>
+            <input type="text" id="message" name="message"><br>
+            <button type="submit">Submit</button>
+            <button type="reset">Reset</button> 
+        </form>
+    </div>
+    <hr>
+    <div id="result"></div>
+    <script>
+        let form = document.getElementById("myForm");
+        form = document.nameForm;/* forms[1] */
+        let resultDiv = document.getElementById("result");
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+            let messageInput = document.getElementById("message");
+            let message = messageInput.value;
+            resultDiv.innerText = "You typed: " + message;
+        });
+        form.addEventListener("reset", function () {
+            resultDiv.innerText = "Form reset!";
+        });
+    </script>
+</body>
+
+</html>
