@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #rotateImage {
+            transition: transform 1s;
+        }
+    </style>
+    <h4> 마우스 커서를 이미지 위에 올렸다가 치워보세요</h4>
+    <hr>
+    <img id="rotateImage" src="../media/photo2.jpg">
+    <script>
+        let image = document.getElementById("rotateImage");
+        image.onmouseover = gone;
+        image.onmouseout = back;
+
+        function gone() {
+            image.style.transform = "scale(0, 0)";
+        }
+        function back() {
+            image.style.transform = "scale(1, 1)";
+        }
+    </script>
+</body>
+
+</html>

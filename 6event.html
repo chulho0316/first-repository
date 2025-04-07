@@ -1,0 +1,19 @@
+<body>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        #loadingImage {
+            transition: transform 0.5s;
+        }
+    </style>
+    <h4>페이지 로딩</h4>
+    <img id="loadingImage" src="../media/photo6.png">
+    <script>
+        const image = document.getElementById("loadingImage");
+        image.addEventListener("load", function () {
+            image.style.transform = "rotate(360deg)"
+        });
+    </script>
+</body>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            img {
+                position: absolute;
+                height: 150px;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="photo4.jpg" style="z-index: 1">
+        <img src="photo4.jpg" style="top: 100px; left: 100px; z-index: 50">
+        <img src="photo4.jpg" style="top: 200px; left: 200px; z-index: 100">
+        <img src="photo4.jpg" style="top: 300px; left: 300px; z-index: 80">
+        <img src="photo4.jpg" style="top: 400px; left: 400px; z-index: 70">
+        
+        <script>
+            let maxZindex = 0;
+            let maxZindexImgObj = null;
+
+            // 최대값 및 최대값의 이미지 객체 추출하는 함수
+            function updateMaxZIndex() {
+                maxZindex = 0;
+                document.querySelectorAll("img").forEach(img => {
+                    let zIndex = parseInt(img.style.zIndex);
+                    if (zIndex > maxZindex) {
+                        maxZindex = zIndex;
+                        maxZindexImgObj = img;
+                    }
+                });
+            }
+
+            // 이미지들을 z-index 순으로 정렬하는 함수
+            function sortZindex() {
+                let images = Array.from(document.querySelectorAll("img"));
+                
+                // z-index 값에 따라 이미지들을 정렬
+                images.sort((a, b) => parseInt(b.style.zIndex) - parseInt(a.style.zIndex));
+
+                // 정렬된 이미지의 z-index 값을 0부터 차례대로 다시 설정
+                images.forEach((img, index) => {
+                    img.style.zIndex = index;
+                });
+                
+                console.log(images);
+            }
+
+            // img 클릭된 경우 값 비교하여 최대값 객체의 이미지 사이즈와 클릭된 사이즈 서로 교환
+            document.querySelectorAll("img").forEach(img => {
+                img.addEventListener("click", function () {
+                    let thisSize = parseInt(this.style.zIndex);
+                    console.log("현재 클릭한 이미지 z-index:", thisSize);
+
+                    if (maxZindex > thisSize) {
+                        // 클릭된 이미지의 z-index를 maxZindex로 설정하고
+                        this.style.zIndex = maxZindex;
+
+                        // maxZindex를 가진 이미지의 z-index를 클릭된 이미지의 z-index로 변경
+                        maxZindexImgObj.style.zIndex = thisSize;
+
+                        // 최대값 및 최대값 이미지 객체 갱신
+                        updateMaxZIndex();
+                        
+                        // 이미지 재정렬
+                        sortZindex();
+                    }
+                });
+            });
+
+            // 초기 상태에서 최대 z-index 값을 갱신
+            updateMaxZIndex();
+
+        </script>
+    </body>
+</html>

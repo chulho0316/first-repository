@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       
+        <style>
+            img{
+                position: absolute;
+                height:150px;
+            }
+        </style>
+    </head>
+    <body>
+        <img src ="photo4.jpg" style="z-index:1">
+        <img src ="photo4.jpg" style="top: 100px; left: 100px; z-index:50">
+        <img src ="photo4.jpg" style="top: 200px; left: 200px; z-index:100">
+        <img src ="photo4.jpg" style="top: 300px; left: 300px; z-index:80">
+        <img src ="photo4.jpg" style="top: 400px; left: 400px; z-index:70">
+        <script>
+            let maxZindexImgObj;
+            let maxZindexImgObjArr = [];
+            let maxZindex = 0;
+
+            // 최대값 및 최대값의 이미지 객체 추출하는 함수
+            function updateMaxZIndex(){
+                maxZindex = 0;
+                let temp = 0;
+                document.querySelectorAll("img").forEach(img=>{
+                 
+                    let zIndex = parseInt(img.style.zIndex);
+                    
+                    if(zIndex > maxZindex) {
+                        maxZindex = zIndex;
+                        maxZindexImgObj = img;
+                        maxZindexImgObjArr.push(img);
+                    }
+                });
+            }
+            function sortZindex() {
+                // 이미지 전체 get
+                let images = Array.from(document.querySelectorAll("img"));
+                
+                // 정렬 안될때까지 실행
+                while (true) {
+                    let swapped = false;
+                    // 배열의 마지막 인덱스까지 접근하지 않기 위해 -1
+                    for (let i = 0; i < images.length - 1; i++) {
+
+                        let zIndex1 = parseInt(images[i].style.zIndex);
+                        let zIndex2 = parseInt(images[i + 1].style.zIndex);
+
+                        if (zIndex1 != maxZindex || zIndex2 != maxZindex) continue;
+
+                        if (zIndex1 > zIndex2) {
+                            [images[i].style.zIndex, images[i + 1].style.zIndex] = [images[i + 1].style.zIndex, images[i].style.zIndex];
+                            // 정렬되면 종료조건
+                            swapped = true;
+                        }
+                    }
+                    // 종료
+                    if (!swapped) break; // 더 이상 바꿀 게 없으면 종료
+                }
+                
+                console.log(images);
+            }
+           
+            updateMaxZIndex();
+
+            // img click 된 경우 값 비교 하여 최대값 객체의 이미지 사이즈와
+            // 클릭된 사이즈 서로 교환
+            document.querySelectorAll("img").forEach(img=>{
+                img.addEventListener("click", function(){
+                    let thisSize = parseInt(this.style.zIndex);
+              
+                    console.log("현재 클릭한 이미지 z-index:", thisSize);
+                    if(maxZindex > thisSize)
+                    {
+                        this.style.zIndex = maxZindex;
+                        maxZindexImgObj.style.zIndex = thisSize;
+                       
+                        updateMaxZIndex();
+                        sortZindex();
+                    }
+                })
+            })
+
+
+        </script>
+    </body>
+</html>
