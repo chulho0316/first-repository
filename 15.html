@@ -1,0 +1,27 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <canvas id="myCanvas" width="700" height="350"
+        style="border: 2px solid #cef"> </canvas>
+        <script>
+            const canvas = document.getElementById("myCanvas");
+            const ctx = canvas.getContext("2d");
+            let x = 0;
+            let y = 300;
+            function draw() {
+                if (x < canvas.width) {
+                    ctx.beginPath();
+                    ctx.moveTo(x, y);
+                    ctx.lineTo(x + 1, y);
+                    ctx.stroke();
+                    x = x + 1;
+                    y = y - x / 900;
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        </script>
+    </body>
+</html>
